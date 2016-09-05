@@ -1,0 +1,5 @@
+C:\Users\Nicola Watts\Desktop\Cameron Other\DevProject\DevProjectDataModels\bin\Debug\DevProjectDataModels.dll
+C:\Users\Nicola Watts\Desktop\Cameron Other\DevProject\DevProjectDataModels\bin\Debug\DevProjectDataModels.pdb
+C:\Users\Nicola Watts\Desktop\Cameron Other\DevProject\DevProjectDataModels\obj\Debug\DevProjectDataModels.csprojResolveAssemblyReference.cache
+C:\Users\Nicola Watts\Desktop\Cameron Other\DevProject\DevProjectDataModels\obj\Debug\DevProjectDataModels.dll
+C:\Users\Nicola Watts\Desktop\Cameron Other\DevProject\DevProjectDataModels\obj\Debug\DevProjectDataModels.pdb

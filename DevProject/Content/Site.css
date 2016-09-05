@@ -1,0 +1,98 @@
+﻿/* /* /*style.css
+author: Catherine Nguyen
+created: 30/08/2016
+last modified: 31/08/2016
+description: A style sheet for client PHP
+*/
+
+/*===============BACKGROUND===============*/
+body {
+    background-color: white;
+    background: url("../Images/bg1.png") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    font-family: 'PT Sans', sans-serif;
+}
+
+/*===============NAVIGATION===============*/
+.navbar-fixed-top .navbar-nav > li > a:hover,
+.navbar-fixed-top .navbar-nav > li > a:focus {
+    color: #FFFFFF;
+    background-color: transparent;
+}
+.navbar-fixed-top .navbar-nav >li > a{
+    color: #333;
+}
+.navbar-right{
+	padding: 20px 20px 0px 0px;
+}
+
+/*===============MAIN GUI================*/
+img {
+  display: block;
+  max-height:300px;
+  width: auto;
+  height: auto;
+  padding-top: 100px;
+}
+
+.jumbotron {
+    padding-top: 10px; 
+    text-align: center;
+    color: #f2f2f2;
+    background-color : transparent;
+}
+.jumbotron h1{
+    color:black;
+    font-size: 25px;
+} 
+
+.buttons{
+    padding-left: 50px;
+}
+
+#otherButtons {
+    padding-top: 20px;
+}
+
+.btn {
+    background-color: #FFFFFF;
+    color: black;
+    text-transform: uppercase;
+    border-color: #FFFFFF;
+}
+
+.btn-xlarge {
+    padding: 18px 28px;
+    font-size: 40px;
+    line-height: normal;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    padding-bottom: 20px
+}
+.saleButton {
+    padding-top: 40px;
+}
+
+.btn-custom {
+    padding: 18px 28px;
+    font-size: 20px;
+    line-height: normal;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    padding-bottom: 20px
+}
+
+/*=================FOOTER================*/
+#footer {
+	color:#FFFFFF;
+    left: 0;
+    bottom: 0;
+    height: 100px;
+    width: 100%;
+	text-align:center;
+}

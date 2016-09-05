@@ -1,0 +1,7 @@
+C:\Users\Nicola Watts\Desktop\Cameron Other\DevProject\DevProjectDataLayer\obj\Debug\DevProjectDataLayer.csprojResolveAssemblyReference.cache
+C:\Users\Nicola Watts\Desktop\Cameron Other\DevProject\DevProjectDataLayer\bin\Debug\DevProjectDataLayer.dll
+C:\Users\Nicola Watts\Desktop\Cameron Other\DevProject\DevProjectDataLayer\bin\Debug\DevProjectDataLayer.pdb
+C:\Users\Nicola Watts\Desktop\Cameron Other\DevProject\DevProjectDataLayer\bin\Debug\DevProjectDataModels.dll
+C:\Users\Nicola Watts\Desktop\Cameron Other\DevProject\DevProjectDataLayer\bin\Debug\DevProjectDataModels.pdb
+C:\Users\Nicola Watts\Desktop\Cameron Other\DevProject\DevProjectDataLayer\obj\Debug\DevProjectDataLayer.dll
+C:\Users\Nicola Watts\Desktop\Cameron Other\DevProject\DevProjectDataLayer\obj\Debug\DevProjectDataLayer.pdb
