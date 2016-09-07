@@ -7,3 +7,12 @@ C:\Users\Nicola Watts\Desktop\Cameron Other\DevProject\DevProjectBusinessLayer\b
 C:\Users\Nicola Watts\Desktop\Cameron Other\DevProject\DevProjectBusinessLayer\bin\Debug\DevProjectDataModels.pdb
 C:\Users\Nicola Watts\Desktop\Cameron Other\DevProject\DevProjectBusinessLayer\obj\Debug\DevProjectBusinessLayer.dll
 C:\Users\Nicola Watts\Desktop\Cameron Other\DevProject\DevProjectBusinessLayer\obj\Debug\DevProjectBusinessLayer.pdb
+C:\Users\Catherine\Documents\DevProject\DevProjectBusinessLayer\bin\Debug\DevProjectBusinessLayer.dll
+C:\Users\Catherine\Documents\DevProject\DevProjectBusinessLayer\bin\Debug\DevProjectBusinessLayer.pdb
+C:\Users\Catherine\Documents\DevProject\DevProjectBusinessLayer\bin\Debug\DevProjectDataLayer.dll
+C:\Users\Catherine\Documents\DevProject\DevProjectBusinessLayer\bin\Debug\DevProjectDataModels.dll
+C:\Users\Catherine\Documents\DevProject\DevProjectBusinessLayer\bin\Debug\DevProjectDataLayer.pdb
+C:\Users\Catherine\Documents\DevProject\DevProjectBusinessLayer\bin\Debug\DevProjectDataModels.pdb
+C:\Users\Catherine\Documents\DevProject\DevProjectBusinessLayer\obj\Debug\DevProjectBusinessLayer.csprojResolveAssemblyReference.cache
+C:\Users\Catherine\Documents\DevProject\DevProjectBusinessLayer\obj\Debug\DevProjectBusinessLayer.dll
+C:\Users\Catherine\Documents\DevProject\DevProjectBusinessLayer\obj\Debug\DevProjectBusinessLayer.pdb

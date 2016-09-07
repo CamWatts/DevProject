@@ -1,7 +1,7 @@
 ﻿/* /* /*style.css
 author: Catherine Nguyen
 created: 30/08/2016
-last modified: 31/08/2016
+last modified: 07/09/2016
 description: A style sheet for client PHP
 */
 
@@ -36,6 +36,8 @@ img {
   width: auto;
   height: auto;
   padding-top: 100px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .jumbotron {
