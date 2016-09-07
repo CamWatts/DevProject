@@ -73,5 +73,81 @@ namespace DevProject.Controllers.api
                 return response; 
             }
         }
+
+        [Route("updateproduct")]
+        [HttpPost]
+        public HttpResponseMessage UpdateProduct(HttpRequestMessage request, [FromBody] ProductViewModel viewModel)
+        {
+            TransactionStatusModel transStatus = new TransactionStatusModel();
+            ProjectService projectService = new ProjectService();
+
+            if (viewModel == null)
+            {
+                transStatus.ReturnStatus = false;
+                transStatus.ReturnMessage.Add("Empty ProductViewModel!");
+            }
+            else
+            {
+                 transStatus = projectService.UpdateProduct(viewModel.ProductDto);
+            }
+
+            if (transStatus.ReturnStatus == false)
+            {
+                viewModel.ReturnMessage = transStatus.ReturnMessage;
+                viewModel.ReturnStatus = transStatus.ReturnStatus;
+                var badresponse = Request.CreateResponse<ProductViewModel>(HttpStatusCode.BadRequest, viewModel);
+                return badresponse;
+            }
+            else
+            {
+                viewModel.ReturnMessage = transStatus.ReturnMessage;
+                viewModel.ReturnStatus = transStatus.ReturnStatus;
+                viewModel.ReturnMessage.Add("Product successfully updated");
+                var response = Request.CreateResponse<ProductViewModel>(HttpStatusCode.Created, viewModel);
+                return response;
+            }
+        }
+
+        [Route("addtransaction")]
+        [HttpPost]
+        public HttpResponseMessage AddTransaction(HttpRequestMessage request, [FromBody] TransactionViewModel viewModel)
+        {
+            TransactionStatusModel transStatus = new TransactionStatusModel();
+            ProjectService projectService = new ProjectService();
+
+            if (viewModel == null)
+            {
+                transStatus.ReturnStatus = false;
+                transStatus.ReturnMessage.Add("Empty TransactionViewModel!");
+            }
+            else
+            {
+               viewModel.TransactionDto.TransactionId = Guid.NewGuid().ToString();
+                viewModel.TransactionDto.DateTime = DateTime.Now;
+
+                foreach(var sale in viewModel.TransactionDto.SaleDtoList)
+                {
+                    sale.TransactionId = viewModel.TransactionDto.TransactionId;
+                }
+
+                transStatus = projectService.AddTransaction(viewModel.TransactionDto);
+            }
+
+            if (transStatus.ReturnStatus == false)
+            {
+                viewModel.ReturnMessage = transStatus.ReturnMessage;
+                viewModel.ReturnStatus = transStatus.ReturnStatus;
+                var badresponse = Request.CreateResponse<TransactionViewModel>(HttpStatusCode.BadRequest, viewModel);
+                return badresponse;
+            }
+            else
+            {
+                viewModel.ReturnMessage = transStatus.ReturnMessage;
+                viewModel.ReturnStatus = transStatus.ReturnStatus;
+                viewModel.ReturnMessage.Add("Transaction successfully added");
+                var response = Request.CreateResponse<TransactionViewModel>(HttpStatusCode.Created, viewModel);
+                return response;
+            }
+        }
     }
 }

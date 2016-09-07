@@ -98,3 +98,18 @@ img {
     width: 100%;
 	text-align:center;
 }
+
+/*================MODAL STUFF============*/
+.modalallcontainer { 
+    max-height: 225px; 
+    width: 100%;
+    margin: 0; 
+    overflow-y: auto; }
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+        background-color: #C0C0C0;
+    }
+
+textarea {
+    resize: none;
+}

@@ -13,6 +13,6 @@ namespace DevProjectDataModels
         public string Description { get; set; } // product description
         public int StockAmount { get; set; } // amount of stock held for product
         public int CheckAmount { get; set; } // check stock against this value to determine if low stock warning necessary
-        public float SellPrice { get; set; } // price the product is being sold at
+        public double SellPrice { get; set; } // price the product is being sold at
      }
 }

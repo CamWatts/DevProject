@@ -59,5 +59,68 @@ namespace DevProjectBusinessLayer
 
             return transStatus;
         }
+
+        public TransactionStatusModel UpdateProduct(ProductDTO product)
+        {
+            TransactionStatusModel transStatus = new TransactionStatusModel();
+            ProjectDataService dataService = new ProjectDataService();
+
+            using (TransactionScope tran = new TransactionScope())
+            {
+                try
+                {
+                    transStatus = dataService.UpdateProduct(product);
+                }
+                catch (Exception ex)
+                {
+                    transStatus.ReturnStatus = false;
+                    transStatus.ReturnMessage.Add("Update Product Failed");
+                    return transStatus;
+                }
+
+                tran.Complete();
+            }
+
+            return transStatus;
+        }
+
+        public TransactionStatusModel AddTransaction(TransactionDTO transaction)
+        {
+            TransactionStatusModel transStatus = new TransactionStatusModel();
+            ProjectDataService dataService = new ProjectDataService();
+
+            using (TransactionScope tran = new TransactionScope())
+            {
+                try
+                {
+                    transStatus = dataService.AddTransaction(transaction);
+                }
+                catch (Exception ex)
+                {
+                    transStatus.ReturnStatus = false;
+                    transStatus.ReturnMessage.Add("Add Transaction Failed");
+                    return transStatus;
+                }
+
+                try
+                {
+                    foreach (var sale in transaction.SaleDtoList)
+                    {
+                        transStatus = dataService.AddSale(sale);
+                        transStatus = dataService.UpdateStock(sale.ProductDto);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    transStatus.ReturnStatus = false;
+                    transStatus.ReturnMessage.Add("Add Sale Failed");
+                    return transStatus;
+                }
+
+                tran.Complete();
+            }
+
+            return transStatus;
+        }
     }
 }

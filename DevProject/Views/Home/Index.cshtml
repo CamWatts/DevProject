@@ -6,9 +6,12 @@
     <meta name="viewport" content="width = device-width, initial-scale = 1" />
 
     <title>Sales Reporting and Prediction System </title>
+   
+     <!-- AngularJS Core -->
+    <script type="text/javascript" src="~/Scripts/angular.min.js"></script>
 
     <!-- Bootstrap Core CSS -->
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/bootstrap.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="~/Content/Site.css" />
@@ -19,7 +22,7 @@
 </head>
 
 <body>
-
+    <div ng-app="myapp" ng-controller="projectController" id="id_div_project_scope">
     <!--Navigation-->
     <nav class="navbar navbar-fixed-top">
         <div class="container-fluid">
@@ -34,7 +37,7 @@
     <div class="jumbotron">
         <img src="~/Images/sampleLogo3.png" class="img-responsive center-block" alt="Responsive image" align="middle">
 
-        <h1>PEAPLE HEALTH PHARMACY</h1>
+        <h1>PEOPLE HEALTH PHARMACY</h1>
 
         <!-- Button trigger modals -->
         <div class="saleButton">
@@ -114,18 +117,78 @@
     <!-- Modals -->
     <!-- Sale Modal-->
     <div class="modal fade" id="saleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel">Add Sale</h4>
                 </div>
                 <div class="modal-body">
-                    ...
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="txt_tosearch" id="lbl_tosearch">Search:</label>
+                                    <input type="text" id="txt_tosearch" ng-model="toSearch" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="modalallcontainer scrollable">
+                                        <table class="table table-hover table-scrollable">
+                                            <thead>
+                                                <tr>
+                                                    <th width="60%">Product</th>
+                                                    <th width="20%">Quantity</th>
+                                                    <th width="20%">Price</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="Product in Products | orderBy: 'Name' | filter: toSearch" ng-click="addToSale(Product, SoldProducts)">
+                                                    <td>{{Product.Name}}</td>
+                                                    <td>{{Product.StockAmount}}</td>
+                                                    <td>{{Product.SellPrice | currency}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="modalallcontainer scrollable">
+                                        <table class="table table-hover table-scrollable">
+                                            <thead>
+                                                <tr>
+                                                    <th width="60%">Product</th>
+                                                    <th width="20%">Quantity</th>
+                                                    <th width="20%">Price</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="SoldProduct in SoldProducts | orderBy: 'Name'" ng-click="removeFromSale(SoldProduct, Products)">
+                                                    <td>{{SoldProduct.Name}}</td>
+                                                    <td>{{SoldProduct.StockAmount}}</td>
+                                                    <td>{{SoldProduct.SellPrice | currency}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p>Total Price: {{SaleTotalPrice | currency}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-primary" ng-click="addTransaction(SoldProducts)">Save changes</button>
                 </div>
             </div>
         </div>
@@ -133,14 +196,86 @@
 
     <!-- See Products Modal -->
     <div class="modal fade" id="seeProductModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel">See Products</h4>
                 </div>
                 <div class="modal-body">
-                    ...
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="txt_tosearch" id="lbl_tosearch">Search:</label>
+                                    <input type="text" id="txt_tosearch" ng-model="toSearch"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="modalallcontainer scrollable">
+                                        <table class="table table-hover table-scrollable">
+                                            <thead>
+                                                <tr>
+                                                    <th width="60%">Product</th>
+                                                    <th width="20%">Quantity</th>
+                                                    <th width="20%">Price</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="Product in Products | orderBy: 'Name' | filter: toSearch">
+                                                    <td>{{Product.Name}}</td>
+                                                    <td>{{Product.StockAmount}}</td>
+                                                    <td>{{Product.SellPrice | currency}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h4>Add Product</h4>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="txt_addproductname" id="lbl_addproductname">Name:</label>
+                                    <input type="text" id="txt_addproductname" ng-model="addName" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="txt_addproductstock" id="lbl_addproductstock">Stock:</label>
+                                    <input type="number" id="txt_addproductstock" ng-model="addStock" /> 
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="txt_addproductcheck" id="lbl_addproductcheck">Check:</label>
+                                    <input type="number" id="txt_addproductcheck" ng-model="addCheck" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="txt_addproductprice" id="lbl_addproductprice">Price:</label>
+                                    <input type="number" id="txt_addproductprice" step=".01" ng-model="addPrice" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <textarea id="txt_addproductdesc" placeholder="Add description here..." ng-model="addDesc" rows="5"></textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button type="button" class="btn btn-primary" id="btn_addproduct" ng-click="addProduct(addName,addStock,addCheck,addPrice,addDesc)">Add Product</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -151,18 +286,94 @@
 
     <!-- Edit Products Modal -->
     <div class="modal fade" id="editProductModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel">Edit Products</h4>
                 </div>
                 <div class="modal-body">
-                    ...
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="txt_tosearch" id="lbl_tosearch">Search:</label>
+                                    <input type="text" id="txt_tosearch" ng-model="toSearch" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="modalallcontainer scrollable">
+                                        <table class="table table-hover table-scrollable">
+                                            <thead>
+                                                <tr>
+                                                    <th width="60%">Product</th>
+                                                    <th width="20%">Quantity</th>
+                                                    <th width="20%">Price</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="Product in Products | orderBy: 'Name' | filter: toSearch" ng-click="fillTextboxes(Product)">
+                                                    <td>{{Product.Name}}</td>
+                                                    <td>{{Product.StockAmount}}</td>
+                                                    <td>{{Product.SellPrice | currency}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h4>Edit Product</h4>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p>Product ID: {{editID}}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="txt_editproductname" id="lbl_editproductname">Name:</label>
+                                    <input type="text" id="txt_editproductname" ng-model="editName" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="txt_editproductstock" id="lbl_editproductstock">Stock:</label>
+                                    <input type="number" id="txt_editproductstock" ng-model="editStock" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="txt_editproductcheck" id="lbl_editproductcheck">Check:</label>
+                                    <input type="number" id="txt_editproductcheck" ng-model="editCheck" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="txt_editproductprice" id="lbl_editproductprice">Price:</label>
+                                    <input type="number" id="txt_editproductprice" step=".01" ng-model="editPrice" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <textarea id="txt_editproductdesc" placeholder="Add description here..." ng-model="editDesc" rows="5"></textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button type="button" class="btn btn-primary" id="btn_editproduct" ng-click="editProduct(editID,editName,editStock,editCheck,editPrice,editDesc)">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
         </div>
@@ -186,11 +397,14 @@
             </div>
         </div>
     </div>
-
+    </div>
     <!-- jQuery -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="~/Scripts/bootstrap.min.js"></script>
+
+    <!-- JavaScript File -->
+    <script type="text/javascript" src="~/Scripts/project.js"></script>
 </body>
 </html>
