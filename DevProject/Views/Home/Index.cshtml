@@ -85,7 +85,18 @@
                     <h4 class="modal-title" id="myModalLabel">Add User</h4>
                 </div>
                 <div class="modal-body">
-                    ...
+                    <div class="container-fluid">
+                        <form>
+                            <div class="form-group">
+                                <label for="newUserName">Enter new user name:</label>
+                                <input type="text" class="form-control" id="NewUserName" />
+                            </div>
+                            <div class="form-group">
+                                <label for="newPassword">Enter new password:</label>
+                                <input type="password" class="form-control" id="newPassword" />
+                            </div>
+                        </form>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -104,7 +115,18 @@
                     <h4 class="modal-title" id="myModalLabel">Log in</h4>
                 </div>
                 <div class="modal-body">
-                    ...
+                    <div class="container-fluid">
+                        <form>
+                            <div class="form-group">
+                                <label for="userName">User Name:</label>
+                                <input type="text" class="form-control" id="userName" />
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password:</label>
+                                <input type="password" class="form-control" id="password" />
+                            </div>
+                        </form>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -124,63 +146,65 @@
                     <h4 class="modal-title" id="myModalLabel">Add Sale</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <label for="txt_tosearch" id="lbl_tosearch">Search:</label>
-                                    <input type="text" id="txt_tosearch" ng-model="toSearch" />
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="modalallcontainer scrollable">
-                                        <table class="table table-hover table-scrollable">
-                                            <thead>
-                                                <tr>
-                                                    <th width="60%">Product</th>
-                                                    <th width="20%">Quantity</th>
-                                                    <th width="20%">Price</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr ng-repeat="Product in Products | orderBy: 'Name' | filter: toSearch" ng-click="addToSale(Product, SoldProducts)">
-                                                    <td>{{Product.Name}}</td>
-                                                    <td>{{Product.StockAmount}}</td>
-                                                    <td>{{Product.SellPrice | currency}}</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label for="txt_tosearch" id="lbl_tosearch">Search:</label>
+                                <input type="text" id="txt_tosearch" ng-model="toSearch" />
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="modalallcontainer scrollable">
-                                        <table class="table table-hover table-scrollable">
-                                            <thead>
-                                                <tr>
-                                                    <th width="60%">Product</th>
-                                                    <th width="20%">Quantity</th>
-                                                    <th width="20%">Price</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr ng-repeat="SoldProduct in SoldProducts | orderBy: 'Name'" ng-click="removeFromSale(SoldProduct, Products)">
-                                                    <td>{{SoldProduct.Name}}</td>
-                                                    <td>{{SoldProduct.StockAmount}}</td>
-                                                    <td>{{SoldProduct.SellPrice | currency}}</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="modalallcontainer scrollable">
+                                            <table class="table table-hover table-scrollable">
+                                                <thead>
+                                                    <tr>
+                                                        <th width="60%">Product</th>
+                                                        <th width="20%">Quantity</th>
+                                                        <th width="20%">Price</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="Product in Products | orderBy: 'Name' | filter: toSearch" ng-click="addToSale(Product, SoldProducts)">
+                                                        <td>{{Product.Name}}</td>
+                                                        <td>{{Product.StockAmount}}</td>
+                                                        <td>{{Product.SellPrice | currency}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <p>Total Price: {{SaleTotalPrice | currency}}</p>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="modalallcontainer scrollable">
+                                            <table class="table table-hover table-scrollable">
+                                                <thead>
+                                                    <tr>
+                                                        <th width="60%">Product</th>
+                                                        <th width="20%">Quantity</th>
+                                                        <th width="20%">Price</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="SoldProduct in SoldProducts | orderBy: 'Name'" ng-click="removeFromSale(SoldProduct, Products)">
+                                                        <td>{{SoldProduct.Name}}</td>
+                                                        <td>{{SoldProduct.StockAmount}}</td>
+                                                        <td>{{SoldProduct.SellPrice | currency}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p>Total Price: {{SaleTotalPrice | currency}}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -235,45 +259,31 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h4>Add Product</h4>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
+                            <form>
+                                <h3>Add Product</h3>    
+                                <div class="form-group">
                                     <label for="txt_addproductname" id="lbl_addproductname">Name:</label>
-                                    <input type="text" id="txt_addproductname" ng-model="addName" />
+                                    <input type="text" class="form-control" id="txt_addproductname" ng-model="addName" />
+                                </div>    
+                                <div class="form-group">
+                                        <label for="txt_addproductstock" id="lbl_addproductstock">Stock:</label>
+                                        <input type="number" class="form-control" id="txt_addproductstock" ng-model="addStock" /> 
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <label for="txt_addproductstock" id="lbl_addproductstock">Stock:</label>
-                                    <input type="number" id="txt_addproductstock" ng-model="addStock" /> 
+                                <div class="form-group">
+                                        <label for="txt_addproductcheck" id="lbl_addproductcheck">Check:</label>
+                                        <input type="number" class="form-control" id="txt_addproductcheck" ng-model="addCheck" />
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <label for="txt_addproductcheck" id="lbl_addproductcheck">Check:</label>
-                                    <input type="number" id="txt_addproductcheck" ng-model="addCheck" />
+                                <div class="form-group">
+                                        <label for="txt_addproductprice" id="lbl_addproductprice">Price:</label>
+                                        <input type="number" class="form-control" id="txt_addproductprice" step=".01" ng-model="addPrice" />
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <label for="txt_addproductprice" id="lbl_addproductprice">Price:</label>
-                                    <input type="number" id="txt_addproductprice" step=".01" ng-model="addPrice" />
+                                <div class="form-group">
+                                        <textarea id="txt_addproductdesc" class="form-control" placeholder="Add description here..." ng-model="addDesc" rows="5"></textarea>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <textarea id="txt_addproductdesc" placeholder="Add description here..." ng-model="addDesc" rows="5"></textarea>
+                                <div class="form-group">
+                                        <button type="button" class="btn btn-primary" id="btn_addproduct" ng-click="addProduct(addName,addStock,addCheck,addPrice,addDesc)">Add Product</button>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <button type="button" class="btn btn-primary" id="btn_addproduct" ng-click="addProduct(addName,addStock,addCheck,addPrice,addDesc)">Add Product</button>
-                                </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
