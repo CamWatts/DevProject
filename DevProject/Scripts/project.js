@@ -40,9 +40,7 @@ app.controller("projectController", function ($scope) {
 
             product.StockAmount -= 1;
 
-            soldProducts.forEach(function (soldProduct) {
-                $scope.SaleTotalPrice += soldProduct.SellPrice;
-            });
+            $scope.SaleTotalPrice += product.SellPrice;
 
         }
         
@@ -50,7 +48,8 @@ app.controller("projectController", function ($scope) {
 
     $scope.removeFromSale = function (soldProduct, Products) {
         var newSellPrice = soldProduct.SellPrice / soldProduct.StockAmount;
-        soldProduct.SellPrice = newSellPrice;
+        $scope.SaleTotalPrice -= newSellPrice;
+        soldProduct.SellPrice -= newSellPrice;
         soldProduct.StockAmount -= 1
 
         if (soldProduct.StockAmount == 0) {
@@ -64,10 +63,6 @@ app.controller("projectController", function ($scope) {
             if (product.ProductId == soldProduct.ProductId) {
                 product.StockAmount += 1;
             }
-        });
-
-        soldProducts.forEach(function (soldProduct) {
-            $scope.SaleTotalPrice += soldProduct.SellPrice;
         });
     };
 
