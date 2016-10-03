@@ -16,3 +16,12 @@ C:\Users\Catherine\Documents\DevProject\DevProjectBusinessLayer\bin\Debug\DevPro
 C:\Users\Catherine\Documents\DevProject\DevProjectBusinessLayer\obj\Debug\DevProjectBusinessLayer.csprojResolveAssemblyReference.cache
 C:\Users\Catherine\Documents\DevProject\DevProjectBusinessLayer\obj\Debug\DevProjectBusinessLayer.dll
 C:\Users\Catherine\Documents\DevProject\DevProjectBusinessLayer\obj\Debug\DevProjectBusinessLayer.pdb
+D:\Documents\GitHub\DevProject\DevProjectBusinessLayer\bin\Debug\DevProjectBusinessLayer.dll
+D:\Documents\GitHub\DevProject\DevProjectBusinessLayer\bin\Debug\DevProjectBusinessLayer.pdb
+D:\Documents\GitHub\DevProject\DevProjectBusinessLayer\bin\Debug\DevProjectDataLayer.dll
+D:\Documents\GitHub\DevProject\DevProjectBusinessLayer\bin\Debug\DevProjectDataModels.dll
+D:\Documents\GitHub\DevProject\DevProjectBusinessLayer\bin\Debug\DevProjectDataLayer.pdb
+D:\Documents\GitHub\DevProject\DevProjectBusinessLayer\bin\Debug\DevProjectDataModels.pdb
+D:\Documents\GitHub\DevProject\DevProjectBusinessLayer\obj\Debug\DevProjectBusinessLayer.csprojResolveAssemblyReference.cache
+D:\Documents\GitHub\DevProject\DevProjectBusinessLayer\obj\Debug\DevProjectBusinessLayer.dll
+D:\Documents\GitHub\DevProject\DevProjectBusinessLayer\obj\Debug\DevProjectBusinessLayer.pdb
