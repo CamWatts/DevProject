@@ -149,5 +149,65 @@ namespace DevProject.Controllers.api
                 return response;
             }
         }
+
+        [Route("addnewuser")]
+        [HttpPost]
+        public HttpResponseMessage AddNewUser(HttpRequestMessage request, [FromBody] UserViewModel viewModel)
+        {
+            TransactionStatusModel transStatus = new TransactionStatusModel();
+            ProjectService projectService = new ProjectService();
+
+            if (viewModel == null)
+            {
+                transStatus.ReturnStatus = false;
+                transStatus.ReturnMessage.Add("Empty UserViewModel!");
+            }
+            else
+            {
+                viewModel.UserDto.UserID = Guid.NewGuid().ToString();
+
+                transStatus = projectService.AddNewUser(viewModel.UserDto);
+            }
+
+            if (transStatus.ReturnStatus == false)
+            {
+                viewModel.ReturnMessage = transStatus.ReturnMessage;
+                viewModel.ReturnStatus = transStatus.ReturnStatus;
+                var badresponse = Request.CreateResponse<UserViewModel>(HttpStatusCode.BadRequest, viewModel);
+                return badresponse;
+            }
+            else
+            {
+                viewModel.ReturnMessage = transStatus.ReturnMessage;
+                viewModel.ReturnStatus = transStatus.ReturnStatus;
+                viewModel.ReturnMessage.Add("User successfully added");
+                var response = Request.CreateResponse<UserViewModel>(HttpStatusCode.Created, viewModel);
+                return response;
+            }
+        }
+
+        [Route("getallusers")]
+        [HttpGet]
+        public HttpResponseMessage GetAllUsers()
+        {
+            UserViewModel viewModel = new UserViewModel();
+            ProjectService projectService = new ProjectService();
+            List<UserDTO> userDtoList = new List<UserDTO>();
+
+            try
+            {
+                userDtoList = projectService.GetAllUsers();
+                viewModel.UserDtoList = userDtoList;
+                viewModel.ReturnStatus = true;
+                viewModel.ReturnMessage.Add("Get users successful");
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError);
+            }
+
+            var response = Request.CreateResponse<UserViewModel>(HttpStatusCode.OK, viewModel);
+            return response;
+        }
     }
 }
