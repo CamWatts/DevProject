@@ -116,7 +116,7 @@ app.controller("projectController", function ($scope) {
         $scope.editPrice = product.SellPrice;
         $scope.editDesc = product.Description;
     };
-<<<<<<< HEAD
+
     
     $scope.generateSales = function (products) {
             productList = [];
@@ -130,10 +130,7 @@ app.controller("projectController", function ($scope) {
             }
             AddTransaction(productList, $scope);
         } 
-    
-    
-    
-=======
+
 
     $scope.addUser = function (firstName, lastName, address, mobile, userName, password) {
         if (angular.isUndefined(firstName) || firstName == null || angular.isUndefined(lastName) || lastName == null || angular.isUndefined(address) || address == null || angular.isUndefined(mobile) || mobile == null || angular.isUndefined(userName) || userName == null || angular.isUndefined(userName) || userName == null) {
@@ -143,7 +140,11 @@ app.controller("projectController", function ($scope) {
             AddNewUser(firstName, lastName, address, mobile, userName, password, $scope)
         }
     };
->>>>>>> fb8e698838c46e7a85100be8267e3acfac41e2c8
+
+    $scope.toReports = function () {
+        location.assign("Reports/Index");
+    }
+
 });
 
 

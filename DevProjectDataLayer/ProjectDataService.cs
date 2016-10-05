@@ -275,6 +275,7 @@ namespace DevProjectDataLayer
                     con.Open();
 
                     using (SqlDataReader rdr = cmd.ExecuteReader())
+                      
                     {
                         if (rdr.HasRows)
                         {
@@ -304,6 +305,179 @@ namespace DevProjectDataLayer
 
             }
             return userDtoList;
+        }
+
+        public List<ReportDTO> GetMonthlyReports (int months, int productCount)
+        {
+            List<ReportDTO> reportDtoList = new List<ReportDTO>();
+
+
+                using (SqlConnection con = new SqlConnection(cs))
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("GetMonthlyReports", con);
+
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("@count", months));
+                    con.Open();
+
+                    using (SqlDataReader rdr = cmd.ExecuteReader())
+                    {
+                        if (rdr.HasRows)
+                        {
+                            ReportDTO reportDto = new ReportDTO();
+                            reportDto.Sales = new List<int>();
+                            while (rdr.Read())
+                            {
+                                int year = rdr.GetInt32(0);
+                                int month = rdr.GetInt32(1);
+                                String date = month.ToString() + "-" + year.ToString();
+                                double total = rdr.GetDouble(4);
+                                double sellPrice = rdr.GetDouble(5);
+                                int totalSold = Convert.ToInt32(total / sellPrice);
+
+                                if (reportDto.Date == date)
+                                {
+                                    
+                                    reportDto.Sales.Add(totalSold);
+                                }
+                                else
+                                {
+                                    if (reportDto.Date != null)
+                                    {
+                                        reportDtoList.Add(reportDto);
+                                    }
+
+                                    reportDto = new ReportDTO();
+                                    reportDto.Sales = new List<int>();
+                                    reportDto.Date = date;
+                                    reportDto.Sales.Add(totalSold);
+                                }
+                            }
+                            reportDtoList.Add(reportDto); // adds final month
+
+                            reportDto = new ReportDTO();
+                            reportDto.Sales = new List<int>();
+                            reportDto.Date = "Prediction next month";
+                            for (int i = 0; i < reportDtoList[0].Sales.Count; i++)
+                            {
+                                int totalSold = 0;
+                                foreach (var item in reportDtoList)
+                                {
+                                    totalSold += item.Sales[i];
+                                }
+                                totalSold /= reportDtoList.Count;
+                                reportDto.Sales.Add(totalSold);
+                            }
+                            reportDtoList.Add(reportDto);
+                        }
+                        else
+                        {
+                            Console.WriteLine("No rows found");
+                        }
+                        rdr.Close();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+
+            }
+            return reportDtoList;
+        }
+
+        public List<ReportDTO> GetWeeklyReports(int months, int productCount)
+        {
+            List<ReportDTO> reportDtoList = new List<ReportDTO>();
+
+
+            using (SqlConnection con = new SqlConnection(cs))
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("GetWeeklyReports", con);
+
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("@count", months));
+                    con.Open();
+
+                    using (SqlDataReader rdr = cmd.ExecuteReader())
+                    {
+                        if (rdr.HasRows)
+                        {
+                            ReportDTO reportDto = new ReportDTO();
+                            reportDto.Sales = new List<int>();
+                            
+                            while (rdr.Read())
+                            {
+                                DateTime datetime = rdr.GetDateTime(2);
+                                String date = datetime.ToString();
+                                date = date.Substring(0, 10);
+                                double total = rdr.GetDouble(5);
+                                double sellPrice = rdr.GetDouble(6);
+                                int totalSold = Convert.ToInt32(total / sellPrice);
+
+                                if (reportDto.Date == date)
+                                {
+                                    if (reportDto.Sales.Count < 8) {
+                                        reportDto.Sales.Add(totalSold);
+                                    }
+                                    else
+                                    {
+                                        reportDto.Sales[reportDto.Sales.Count - 8] += totalSold;
+                                    }
+                                }
+                                else
+                                {
+                                    if (reportDto.Date != null)
+                                    {
+                                        reportDtoList.Add(reportDto);
+                                    }
+
+                                    reportDto = new ReportDTO();
+                                    reportDto.Sales = new List<int>();
+                                    reportDto.Date = date;
+                                    reportDto.Sales.Add(totalSold);
+                                }
+                            }
+                            reportDtoList.Add(reportDto); // adds final month
+
+                            reportDto = new ReportDTO();
+                            reportDto.Sales = new List<int>();
+                            reportDto.Date = "Prediction next week";
+                            for (int i = 0; i < reportDtoList[0].Sales.Count; i++)
+                            {
+                                int totalSold = 0;
+                                foreach (var item in reportDtoList)
+                                {
+                                    if (i < item.Sales.Count)
+                                    {
+                                        totalSold += item.Sales[i];
+                                    }
+                                }
+                                totalSold /= reportDtoList.Count;
+                                reportDto.Sales.Add(totalSold);
+                            }
+                            reportDtoList.Add(reportDto);
+                        }
+                        else
+                        {
+                            Console.WriteLine("No rows found");
+                        }
+                        rdr.Close();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+
+            }
+            return reportDtoList;
         }
     }
 }

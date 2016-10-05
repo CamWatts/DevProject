@@ -124,7 +124,7 @@ namespace DevProject.Controllers.api
             {
                viewModel.TransactionDto.TransactionId = Guid.NewGuid().ToString();
                viewModel.TransactionDto.DateTime = DateTime.Now; // uncomment for normal usability
-                var rnd = new Random();
+                //var rnd = new Random();
 
                 //comment out these next two lines when not using Sale Generator button
                 //DateTime today = DateTime.Now;
@@ -212,6 +212,54 @@ namespace DevProject.Controllers.api
             }
 
             var response = Request.CreateResponse<UserViewModel>(HttpStatusCode.OK, viewModel);
+            return response;
+        }
+
+        [Route("getmonthlyreports")]
+        [HttpGet]
+        public HttpResponseMessage GetMonthlyReports(int months, int productCount)
+        {
+            ReportViewModel viewModel = new ReportViewModel();
+            ProjectService projectService = new ProjectService();
+            List<ReportDTO> reportDtoList = new List<ReportDTO>();
+
+            try
+            {
+                reportDtoList = projectService.GetMonthlyReports(months, productCount);
+                viewModel.ReportDtoList = reportDtoList;
+                viewModel.ReturnStatus = true;
+                viewModel.ReturnMessage.Add("Get monthly reports successful");
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError);
+            }
+
+            var response = Request.CreateResponse<ReportViewModel>(HttpStatusCode.OK, viewModel);
+            return response;
+        }
+
+        [Route("getweeklyreports")]
+        [HttpGet]
+        public HttpResponseMessage GetWeeklyReports(int months, int productCount)
+        {
+            ReportViewModel viewModel = new ReportViewModel();
+            ProjectService projectService = new ProjectService();
+            List<ReportDTO> reportDtoList = new List<ReportDTO>();
+
+            try
+            {
+                reportDtoList = projectService.GetWeeklyReports(months, productCount);
+                viewModel.ReportDtoList = reportDtoList;
+                viewModel.ReturnStatus = true;
+                viewModel.ReturnMessage.Add("Get weekly reports successful");
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError);
+            }
+
+            var response = Request.CreateResponse<ReportViewModel>(HttpStatusCode.OK, viewModel);
             return response;
         }
     }

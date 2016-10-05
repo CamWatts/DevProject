@@ -163,5 +163,39 @@ namespace DevProjectBusinessLayer
 
             return transStatus;
         }
+
+        public List<ReportDTO> GetMonthlyReports (int months, int productCount)
+        {
+            iProject = new ProjectDataService();
+            List<ReportDTO> reportDtoList = new List<ReportDTO>();
+
+            try
+            {
+                reportDtoList = iProject.GetMonthlyReports(months, productCount);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return reportDtoList;
+        }
+
+        public List<ReportDTO> GetWeeklyReports(int months, int productCount)
+        {
+            iProject = new ProjectDataService();
+            List<ReportDTO> reportDtoList = new List<ReportDTO>();
+
+            try
+            {
+                reportDtoList = iProject.GetWeeklyReports(months, productCount);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return reportDtoList;
+        }
     }
 }

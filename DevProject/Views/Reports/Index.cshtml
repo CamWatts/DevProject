@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE-edge" />
+    <meta name="viewport" content="width = device-width, initial-scale = 1" />
+
+    <title>Sales Reporting and Prediction System </title>
+
+    <!-- AngularJS Core -->
+    <script type="text/javascript" src="~/Scripts/angular.min.js"></script>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="~/Content/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="~/Content/Site.css" />
+
+    <!-- Custom Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+</head>
+<body>
+    <div ng-app="myapp" ng-controller="reportController" id="id_div_project_scope">
+        <div class="jumbotron">
+            <img src="~/Images/sampleLogo3.png" class="img-responsive center-block" alt="Responsive image" align="middle">
+
+            <h1>PEOPLE HEALTH PHARMACY</h1>
+            <h2>Report Generation</h2>
+
+            <div id="otherButtons" class="buttons">
+                <ul class="list-inline">
+                    <li>
+                        <button type="button" class="btn btn-primary btn-custom" data-toggle="modal" data-target="#monthlyModal">
+                           Monthly Reports
+                        </button>
+                    </li>
+                    <li>
+                        <button type="button" class="btn btn-primary btn-custom" data-toggle="modal" data-target="#weeklyModal">
+                            Weekly Reports
+                        </button>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+
+            <!-- Monthly Modal-->
+            <div class="modal fade" id="monthlyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Report</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <label for="txt_monthly" id="lbl_monthly">Months back:</label>
+                                    <input type="number" id="txt_monthly" ng-model="Months" />
+                                    <button type="button" class="btn btn-primary" ng-click="generateMonthlyReport(Months,Products)">Generate Report</button>
+                                </div>
+                                <div class="row">
+                                    <div id="tbl_monthly">
+                                        <table class="table table-hover table-scrollable">
+                                            <thead>
+                                                <tr>
+                                                    <th width="10%">Date</th>
+                                                    <th width="10%" ng-repeat="Product in Products">{{Product.Name}}</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="Report in MonthlyReports">
+                                                    <td>{{Report.Date}}</td>
+                                                    <td ng-repeat="Sale in Report.Sales track by $index ">{{Sale}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <a href="#" class="exportMonthly">Download CSV</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <!-- Weekly Modal -->
+        <div class="modal fade" id="weeklyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Report</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <label for="txt_weekly" id="lbl_weekly">Weeks back:</label>
+                                <input type="number" id="txt_weekly" ng-model="Weeks" />
+                                <button type="button" class="btn btn-primary" ng-click="generateWeeklyReport(Weeks,Products)">Generate Report</button>
+                            </div>
+                            <div class="row">
+                                <div id="tbl_weekly">
+                                    <table class="table table-hover table-scrollable">
+                                        <thead>
+                                            <tr>
+                                                <th width="10%">Date</th>
+                                                <th width="10%" ng-repeat="Product in Products">{{Product.Name}}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="Report in WeeklyReports">
+                                                <td>{{Report.Date}}</td>
+                                                <td ng-repeat="Sale in Report.Sales track by $index ">{{Sale}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <a href="#" class="exportWeekly">Download CSV</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- jQuery -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <!-- JavaScript File -->
+    <script type="text/javascript" src="~/Scripts/reports.js"></script>
+</body>
+</html>

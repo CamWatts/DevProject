@@ -11,5 +11,7 @@ namespace DevProjectDataLayer
     {
         List<ProductDTO> GetAllProducts();
         List<UserDTO> GetAllUsers();
+        List<ReportDTO> GetMonthlyReports(int months, int productCount);
+        List<ReportDTO> GetWeeklyReports(int months, int productCount);
     }
 }
