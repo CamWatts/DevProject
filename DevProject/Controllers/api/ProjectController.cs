@@ -123,7 +123,12 @@ namespace DevProject.Controllers.api
             else
             {
                viewModel.TransactionDto.TransactionId = Guid.NewGuid().ToString();
-                viewModel.TransactionDto.DateTime = DateTime.Now;
+               viewModel.TransactionDto.DateTime = DateTime.Now; // uncomment for normal usability
+                var rnd = new Random();
+
+                //comment out these next two lines when not using Sale Generator button
+                //DateTime today = DateTime.Now;
+                //viewModel.TransactionDto.DateTime = today.AddDays(- rnd.Next(0, 120));
 
                 foreach(var sale in viewModel.TransactionDto.SaleDtoList)
                 {

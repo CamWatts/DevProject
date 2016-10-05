@@ -107,7 +107,7 @@ namespace DevProjectBusinessLayer
                     foreach (var sale in transaction.SaleDtoList)
                     {
                         transStatus = dataService.AddSale(sale);
-                        transStatus = dataService.UpdateStock(sale.ProductDto);
+                        transStatus = dataService.UpdateStock(sale.ProductDto); //comment out this line when using Sale Generator
                     }
                 }
                 catch (Exception ex)

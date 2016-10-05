@@ -115,6 +115,22 @@ app.controller("projectController", function ($scope) {
         $scope.editPrice = product.SellPrice;
         $scope.editDesc = product.Description;
     };
+    
+    $scope.generateSales = function (products) {
+            productList = [];
+            for (i = 0; i < 3; i++) {
+                 //soldProduct = new Object();
+                j = Math.floor((Math.random() * products.length));
+                soldProduct = products[j];
+                soldProduct.StockAmount = Math.floor((Math.random() * 5) + 1);
+                soldProduct.SellPrice = products[j].SellPrice * soldProduct.StockAmount;
+                productList.push(soldProduct);
+            }
+            AddTransaction(productList, $scope);
+        } 
+    
+    
+    
 });
 
 function UpdateProduct(id, name, stock, check, price, desc, $scope) {
@@ -198,7 +214,9 @@ function AddTransaction(soldProducts, $scope) {
     TransactionDto.TransactionId = "";
     TransactionDto.UserId = "Not Yet Implemented";
     TransactionDto.DateTime = null;
+    TransactionDto.TotalPrice = 0.00;
     TransactionDto.TotalPrice = $scope.SaleTotalPrice;
+    
     TransactionDto.SaleDtoList = [];
 
     soldProducts.forEach(function (product) {
@@ -208,12 +226,13 @@ function AddTransaction(soldProducts, $scope) {
         ProductDto.ProductId = product.ProductId;
         ProductDto.Name = product.Name;
         ProductDto.Description = product.Description;
-        ProductDto.StockAmount = 1;
+        ProductDto.StockAmount = product.StockAmount;
         ProductDto.CheckAmount = product.CheckAmount;
         ProductDto.SellPrice = product.SellPrice;
         SaleDto.ProductDto = ProductDto;
         SaleDto.TotalPrice = product.SellPrice;
 
+        //TransactionDto.TotalPrice += product.SellPrice;
         TransactionDto.SaleDtoList.push(SaleDto);
     });
 
@@ -225,10 +244,12 @@ function AddTransaction(soldProducts, $scope) {
     },
         "json").success(function (response) {
             window.alert("Transaction successful!");
+            //console.log("Success");
             GetProducts($scope)
             $('#saleModal').modal('hide');
         })
         .fail(function (response) {
             window.alert("Transaction failed");
+            //console.log("Fail");
         });
 }
