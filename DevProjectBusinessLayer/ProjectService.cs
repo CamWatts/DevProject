@@ -122,5 +122,46 @@ namespace DevProjectBusinessLayer
 
             return transStatus;
         }
+
+        public List<UserDTO> GetAllUsers()
+        {
+            iProject = new ProjectDataService();
+            List<UserDTO> userDtoList = new List<UserDTO>();
+
+            try
+            {
+                userDtoList = iProject.GetAllUsers();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return userDtoList;
+        }
+
+        public TransactionStatusModel AddNewUser(UserDTO user)
+        {
+            TransactionStatusModel transStatus = new TransactionStatusModel();
+            ProjectDataService dataService = new ProjectDataService();
+
+            using (TransactionScope tran = new TransactionScope())
+            {
+                try
+                {
+                    transStatus = dataService.AddNewUser(user);
+                }
+                catch (Exception ex)
+                {
+                    transStatus.ReturnStatus = false;
+                    transStatus.ReturnMessage.Add("Add user Failed");
+                    return transStatus;
+                }
+
+                tran.Complete();
+            }
+
+            return transStatus;
+        }
     }
 }

@@ -44,7 +44,7 @@ app.controller("projectController", function ($scope) {
             $scope.SaleTotalPrice += product.SellPrice;
 
         }
-        
+
     };
 
     $scope.removeFromSale = function (soldProduct, Products) {
@@ -72,12 +72,11 @@ app.controller("projectController", function ($scope) {
         if (soldProducts.length == 0) {
             window.alert("Please select sale products");
         }
-        else
-        {
+        else {
             AddTransaction(soldProducts, $scope);
         }
 
-        
+
 
     }
 
@@ -104,7 +103,7 @@ app.controller("projectController", function ($scope) {
             window.alert("Check amount must be lower than the stock amount")
         }
         else {
-            UpdateProduct(id, name, stock, check, price, desc, $scope) 
+            UpdateProduct(id, name, stock, check, price, desc, $scope)
         }
     }
 
@@ -190,7 +189,7 @@ function AddProduct(name, stock, check, price, desc, $scope) {
 };
 
 function GetProducts($scope) {
-    
+
     var jqxhr = $.get("/api/project/getallproducts", function (response) {
     },
         "json").success(function (response) {

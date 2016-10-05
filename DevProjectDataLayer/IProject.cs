@@ -10,5 +10,6 @@ namespace DevProjectDataLayer
     public interface IProject
     {
         List<ProductDTO> GetAllProducts();
+        List<UserDTO> GetAllUsers();
     }
 }
