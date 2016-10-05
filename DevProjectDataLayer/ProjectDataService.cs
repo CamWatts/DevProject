@@ -223,6 +223,88 @@ namespace DevProjectDataLayer
             transStatus.ReturnStatus = true;
             return transStatus;
         }
+
+        public TransactionStatusModel AddNewUser(UserDTO user)
+        {
+            TransactionStatusModel transStatus = new TransactionStatusModel();
+
+            using (SqlConnection con = new SqlConnection(cs))
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("AddUser", con);
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("@userId", user.UserID));
+                    cmd.Parameters.Add(new SqlParameter("@firstName", user.FirstName));
+                    cmd.Parameters.Add(new SqlParameter("@lastName", user.LastName));
+                    cmd.Parameters.Add(new SqlParameter("@address", user.Address));
+                    cmd.Parameters.Add(new SqlParameter("@mobile", user.Mobile));
+                    cmd.Parameters.Add(new SqlParameter("@username", user.Username));
+                    cmd.Parameters.Add(new SqlParameter("@password", user.Password));
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    transStatus.ReturnMessage.Add("Add User failed");
+                    transStatus.ReturnStatus = false;
+                    return transStatus;
+                }
+            }
+
+            transStatus.ReturnMessage.Add("User successfully added");
+            transStatus.ReturnStatus = true;
+            return transStatus;
+        }
+
+        public List<UserDTO> GetAllUsers()
+        {
+            List<UserDTO> userDtoList = new List<UserDTO>();
+
+            using (SqlConnection con = new SqlConnection(cs))
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("GetAllUsers", con);
+
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    con.Open();
+
+                    using (SqlDataReader rdr = cmd.ExecuteReader())
+                    {
+                        if (rdr.HasRows)
+                        {
+                            while (rdr.Read())
+                            {
+                                UserDTO userDto = new UserDTO();
+                                userDto.UserID = rdr.GetString(0);
+                                userDto.FirstName = rdr.GetString(1);
+                                userDto.LastName = rdr.GetString(2);
+                                userDto.Address = rdr.GetString(3);
+                                userDto.Username = rdr.GetString(4);
+                                userDto.Password = rdr.GetString(5);
+                                userDtoList.Add(userDto);
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("No rows found");
+                        }
+                        rdr.Close();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+
+            }
+            return userDtoList;
+        }
     }
 }
 

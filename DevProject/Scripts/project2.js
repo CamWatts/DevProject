@@ -44,7 +44,7 @@ app.controller("projectController", function ($scope) {
             $scope.SaleTotalPrice += product.SellPrice;
 
         }
-        
+
     };
 
     $scope.removeFromSale = function (soldProduct, Products) {
@@ -72,12 +72,11 @@ app.controller("projectController", function ($scope) {
         if (soldProducts.length == 0) {
             window.alert("Please select sale products");
         }
-        else
-        {
+        else {
             AddTransaction(soldProducts, $scope);
         }
 
-        
+
 
     }
 
@@ -104,7 +103,7 @@ app.controller("projectController", function ($scope) {
             window.alert("Check amount must be lower than the stock amount")
         }
         else {
-            UpdateProduct(id, name, stock, check, price, desc, $scope) 
+            UpdateProduct(id, name, stock, check, price, desc, $scope)
         }
     }
 
@@ -116,24 +115,6 @@ app.controller("projectController", function ($scope) {
         $scope.editPrice = product.SellPrice;
         $scope.editDesc = product.Description;
     };
-<<<<<<< HEAD
-    
-    $scope.generateSales = function (products) {
-            productList = [];
-            for (i = 0; i < 3; i++) {
-                 //soldProduct = new Object();
-                j = Math.floor((Math.random() * products.length));
-                soldProduct = products[j];
-                soldProduct.StockAmount = Math.floor((Math.random() * 5) + 1);
-                soldProduct.SellPrice = products[j].SellPrice * soldProduct.StockAmount;
-                productList.push(soldProduct);
-            }
-            AddTransaction(productList, $scope);
-        } 
-    
-    
-    
-=======
 
     $scope.addUser = function (firstName, lastName, address, mobile, userName, password) {
         if (angular.isUndefined(firstName) || firstName == null || angular.isUndefined(lastName) || lastName == null || angular.isUndefined(address) || address == null || angular.isUndefined(mobile) || mobile == null || angular.isUndefined(userName) || userName == null || angular.isUndefined(userName) || userName == null) {
@@ -143,7 +124,6 @@ app.controller("projectController", function ($scope) {
             AddNewUser(firstName, lastName, address, mobile, userName, password, $scope)
         }
     };
->>>>>>> fb8e698838c46e7a85100be8267e3acfac41e2c8
 });
 
 
@@ -209,7 +189,7 @@ function AddProduct(name, stock, check, price, desc, $scope) {
 };
 
 function GetProducts($scope) {
-    
+
     var jqxhr = $.get("/api/project/getallproducts", function (response) {
     },
         "json").success(function (response) {
@@ -228,9 +208,7 @@ function AddTransaction(soldProducts, $scope) {
     TransactionDto.TransactionId = "";
     TransactionDto.UserId = "Not Yet Implemented";
     TransactionDto.DateTime = null;
-    TransactionDto.TotalPrice = 0.00;
     TransactionDto.TotalPrice = $scope.SaleTotalPrice;
-    
     TransactionDto.SaleDtoList = [];
 
     soldProducts.forEach(function (product) {
@@ -240,13 +218,12 @@ function AddTransaction(soldProducts, $scope) {
         ProductDto.ProductId = product.ProductId;
         ProductDto.Name = product.Name;
         ProductDto.Description = product.Description;
-        ProductDto.StockAmount = product.StockAmount;
+        ProductDto.StockAmount = 1;
         ProductDto.CheckAmount = product.CheckAmount;
         ProductDto.SellPrice = product.SellPrice;
         SaleDto.ProductDto = ProductDto;
         SaleDto.TotalPrice = product.SellPrice;
 
-        //TransactionDto.TotalPrice += product.SellPrice;
         TransactionDto.SaleDtoList.push(SaleDto);
     });
 
@@ -258,13 +235,11 @@ function AddTransaction(soldProducts, $scope) {
     },
         "json").success(function (response) {
             window.alert("Transaction successful!");
-            //console.log("Success");
             GetProducts($scope)
             $('#saleModal').modal('hide');
         })
         .fail(function (response) {
             window.alert("Transaction failed");
-            //console.log("Fail");
         });
 }
 

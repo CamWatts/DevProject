@@ -28,7 +28,7 @@
         <div class="container-fluid">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#" data-toggle="modal" data-target="#addUserModal"><span class="glyphicon glyphicon-user"></span> Add User</a></li>
-                <li><a href="#" data-toggle="modal" data-target="#loginModal"><span class="glyphicon glyphicon-log-in"></span> Log in</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#editUserModal"><span class="glyphicon glyphicon-log-in"></span> Log in</a></li>
             </ul>
         </div>  <!-- /.container -->
     </nav>
@@ -93,27 +93,46 @@
                 <div class="modal-body">
                     <div class="container-fluid">
                         <form>
+                            <h3>Add User</h3>
                             <div class="form-group">
-                                <label for="newUserName">Enter new user name:</label>
-                                <input type="text" class="form-control" id="NewUserName" />
+                                <label for="txt_adduserfirstname" id="lbl_adduserfirstname">First Name:</label>
+                                <input type="text" class="form-control" id="txt_adduserfirstname" ng-model="addFirstName" />
                             </div>
                             <div class="form-group">
-                                <label for="newPassword">Enter new password:</label>
-                                <input type="password" class="form-control" id="newPassword" />
+                                <label for="txt_adduserlastname" id="lbl_adduserlastname">Last Name:</label>
+                                <input type="text" class="form-control" id="txt_adduserlastname" ng-model="addLastName" />
+                            </div>
+                            <div class="form-group">
+                                <label for="txt_adduseraddress" id="lbl_adduseraddress">Address:</label>
+                                <input type="text" class="form-control" id="txt_useraddress" ng-model="addAddress" />
+                            </div>
+                            <div class="form-group">
+                                <label for="txt_addusermobile" id="lbl_addusermobile">Mobile:</label>
+                                <input type="text" class="form-control" id="txt_addusermobile" ng-model="addMobile" />
+                            </div>
+                            <div class="form-group">
+                                <label for="txt_adduserusername" id="lbl_adduserusername">UserName:</label>
+                                <input type="text" class="form-control" id="txt_adduserusername" ng-model="addUserName" />
+                            </div>
+                            <div class="form-group">
+                                <label for="txt_adduserpassword" id="lbl_adduserpassword">Password:</label>
+                                <input type="text" class="form-control" id="txt_adduserpassword" ng-model="addPassword" />
+                            </div>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-primary" id="btn_addproduct" ng-click="addUser(addFirstName,addLastName,addAddress,addMobile,addUserName,addPassword)">Add User</button>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Create New User</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Login Modal -->
-    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <!-- Edit User Modal -->
+    <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -406,6 +425,6 @@
     <script src="~/Scripts/bootstrap.min.js"></script>
 
     <!-- JavaScript File -->
-    <script type="text/javascript" src="~/Scripts/project.js"></script>
+    <script type="text/javascript" src="~/Scripts/project2.js"></script>
 </body>
 </html>
