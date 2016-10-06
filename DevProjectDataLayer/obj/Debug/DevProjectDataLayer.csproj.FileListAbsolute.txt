@@ -19,3 +19,10 @@ D:\Documents\GitHub\DevProject\DevProjectDataLayer\bin\Debug\DevProjectDataModel
 D:\Documents\GitHub\DevProject\DevProjectDataLayer\obj\Debug\DevProjectDataLayer.csprojResolveAssemblyReference.cache
 D:\Documents\GitHub\DevProject\DevProjectDataLayer\obj\Debug\DevProjectDataLayer.dll
 D:\Documents\GitHub\DevProject\DevProjectDataLayer\obj\Debug\DevProjectDataLayer.pdb
+C:\Users\Jack\Desktop\DevProject\DevProjectDataLayer\bin\Debug\DevProjectDataLayer.dll
+C:\Users\Jack\Desktop\DevProject\DevProjectDataLayer\bin\Debug\DevProjectDataLayer.pdb
+C:\Users\Jack\Desktop\DevProject\DevProjectDataLayer\bin\Debug\DevProjectDataModels.dll
+C:\Users\Jack\Desktop\DevProject\DevProjectDataLayer\bin\Debug\DevProjectDataModels.pdb
+C:\Users\Jack\Desktop\DevProject\DevProjectDataLayer\obj\Debug\DevProjectDataLayer.csprojResolveAssemblyReference.cache
+C:\Users\Jack\Desktop\DevProject\DevProjectDataLayer\obj\Debug\DevProjectDataLayer.dll
+C:\Users\Jack\Desktop\DevProject\DevProjectDataLayer\obj\Debug\DevProjectDataLayer.pdb

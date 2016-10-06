@@ -6,7 +6,7 @@ app.controller("projectController", function ($scope) {
     $scope.SaleTotalPrice = 0.00;
 
     GetProducts($scope);
-    //GetUsers($scope);
+    GetUsers($scope);
 
     $scope.addToSale = function (product, soldProducts) {
         var isFound = false;
@@ -124,6 +124,28 @@ app.controller("projectController", function ($scope) {
         else {
             AddNewUser(firstName, lastName, address, mobile, userName, password, $scope)
         }
+    };
+
+    $scope.editUser = function (id, fisrtname, lastname, address, mobile, username, password) {
+        if (angular.isUndefined(id) || id == null) {
+            window.alert("Please select a user")
+        }
+        else if (angular.isUndefined(firstname) || firstname == null || angular.isUndefined(lastname) || lastname == null || angular.isUndefined(address) || address == null || angular.isUndefined(mobile) || mobile == null || angular.isUndefined(username) || username == null || angular.isUndefined(password) || password == null) {
+            window.alert("Please ensure all user fields have been filled")
+        }
+        else {
+            UpdateUser(id, firstname, lastname, address, mobile, username, password, $scope)
+        }
+    }
+
+    $scope.fillTextboxes2 = function (user) {
+        $scope.editID = user.UserID;
+        $scope.editFirstName = user.FirstName;
+        $scope.editLastName = user.LastName;
+        $scope.editAddress = user.Address;
+        $scope.editMobile = user.Mobile;
+        $scope.editUsername = user.Username;
+        $scope.editPassword = user.Password;
     };
 });
 
@@ -288,3 +310,36 @@ function GetUsers($scope) {
 
         });
 };
+
+function UpdateUser(id, firstname, lastname, address, mobile, username, password, $scope) {
+    $scope.editID = "";
+    $scope.editFirtName = "";
+    $scope.editLastName = "";
+    $scope.editAddress = "";
+    $scope.editMobile = "";
+    $scope.editUserName = "";
+    $scope.editPassword = "";
+
+    var viewModel = new Object();
+    var UserDto = new Object();
+    UserDto.UserID = id;
+    UserDto.FirstName = firstname;
+    UserDto.LastName = lastname;
+    UserDto.Address = address;
+    UserDto.Mobile = mobile;
+    UserDto.Username = username;
+    UserDto.Password = password;
+
+    viewModel.UserDto = UserDto;
+
+    var jqxhr = $.post("/api/project/updateuser", viewModel, function (response) {
+    },
+        "json").success(function (response) {
+            window.alert(firstname + " updated!");
+            GetUsers($scope)
+            $('#editUserModal').modal('hide');
+        })
+        .fail(function (response) {
+            window.alert("User could not be updated");
+        });
+}

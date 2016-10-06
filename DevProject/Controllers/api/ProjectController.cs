@@ -209,5 +209,39 @@ namespace DevProject.Controllers.api
             var response = Request.CreateResponse<UserViewModel>(HttpStatusCode.OK, viewModel);
             return response;
         }
+
+        [Route("updateuser")]
+        [HttpPost]
+        public HttpResponseMessage UpdateUser(HttpRequestMessage request, [FromBody] UserViewModel viewModel)
+        {
+            TransactionStatusModel transStatus = new TransactionStatusModel();
+            ProjectService projectService = new ProjectService();
+
+            if (viewModel == null)
+            {
+                transStatus.ReturnStatus = false;
+                transStatus.ReturnMessage.Add("Empty UserViewModel!");
+            }
+            else
+            {
+                transStatus = projectService.UpdateUser(viewModel.UserDto);
+            }
+
+            if (transStatus.ReturnStatus == false)
+            {
+                viewModel.ReturnMessage = transStatus.ReturnMessage;
+                viewModel.ReturnStatus = transStatus.ReturnStatus;
+                var badresponse = Request.CreateResponse<UserViewModel>(HttpStatusCode.BadRequest, viewModel);
+                return badresponse;
+            }
+            else
+            {
+                viewModel.ReturnMessage = transStatus.ReturnMessage;
+                viewModel.ReturnStatus = transStatus.ReturnStatus;
+                viewModel.ReturnMessage.Add("User successfully updated");
+                var response = Request.CreateResponse<UserViewModel>(HttpStatusCode.Created, viewModel);
+                return response;
+            }
+        }
     }
 }

@@ -163,5 +163,29 @@ namespace DevProjectBusinessLayer
 
             return transStatus;
         }
+
+        public TransactionStatusModel UpdateUser(UserDTO user)
+        {
+            TransactionStatusModel transStatus = new TransactionStatusModel();
+            ProjectDataService dataService = new ProjectDataService();
+
+            using (TransactionScope tran = new TransactionScope())
+            {
+                try
+                {
+                    transStatus = dataService.UpdateUser(user);
+                }
+                catch (Exception ex)
+                {
+                    transStatus.ReturnStatus = false;
+                    transStatus.ReturnMessage.Add("Update User Failed");
+                    return transStatus;
+                }
+
+                tran.Complete();
+            }
+
+            return transStatus;
+        }
     }
 }

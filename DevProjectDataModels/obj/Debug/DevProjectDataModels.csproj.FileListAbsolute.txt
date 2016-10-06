@@ -8,3 +8,8 @@ D:\Documents\GitHub\DevProject\DevProjectDataModels\bin\Debug\DevProjectDataMode
 D:\Documents\GitHub\DevProject\DevProjectDataModels\obj\Debug\DevProjectDataModels.csprojResolveAssemblyReference.cache
 D:\Documents\GitHub\DevProject\DevProjectDataModels\obj\Debug\DevProjectDataModels.dll
 D:\Documents\GitHub\DevProject\DevProjectDataModels\obj\Debug\DevProjectDataModels.pdb
+C:\Users\Jack\Desktop\DevProject\DevProjectDataModels\bin\Debug\DevProjectDataModels.dll
+C:\Users\Jack\Desktop\DevProject\DevProjectDataModels\bin\Debug\DevProjectDataModels.pdb
+C:\Users\Jack\Desktop\DevProject\DevProjectDataModels\obj\Debug\DevProjectDataModels.csprojResolveAssemblyReference.cache
+C:\Users\Jack\Desktop\DevProject\DevProjectDataModels\obj\Debug\DevProjectDataModels.dll
+C:\Users\Jack\Desktop\DevProject\DevProjectDataModels\obj\Debug\DevProjectDataModels.pdb
