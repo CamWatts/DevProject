@@ -28,7 +28,7 @@
         <div class="container-fluid">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#" data-toggle="modal" data-target="#addUserModal"><span class="glyphicon glyphicon-user"></span> Add User</a></li>
-                <li><a href="#" data-toggle="modal" data-target="#editUserModal"><span class="glyphicon glyphicon-log-in"></span> Log in</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#editUserModal"><span class="glyphicon glyphicon-edit-user"></span> Edit User</a></li>
             </ul>
         </div>  <!-- /.container -->
     </nav>
@@ -140,17 +140,77 @@
                     <h4 class="modal-title" id="myModalLabel">Log in</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="container-fluid">
-                        <form>
-                            <div class="form-group">
-                                <label for="userName">User Name:</label>
-                                <input type="text" class="form-control" id="userName" />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="txt_tosearch" id="lbl_tosearch">Search:</label>
+                                    <input type="text" id="txt_tosearch" ng-model="toSearch" />
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="password">Password:</label>
-                                <input type="password" class="form-control" id="password" />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="modalallcontainer scrollable">
+                                        <table class="table table-hover table-scrollable">
+                                            <thead>
+                                                <tr>
+                                                    <th width="60%">Frist name</th>
+                                                    <th width="20%">Last name</th>
+                                                    <th width="20%">Address</th>
+                                                    <th width="20%">Mobile</th>
+                                                    <th width="20%">Username</th>
+                                                    <th width="20%">Password</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="User in Users | orderBy: 'Name' | filter: toSearch" ng-click="fillTextboxes2(User)">
+                                                    <td>{{User.FirstName}}</td>
+                                                    <td>{{User.LastName}}</td>
+                                                    <td>{{User.Address}}</td>
+                                                    <td>{{User.Mobile}}</td>
+                                                    <td>{{User.UserName}}</td>
+                                                    <td>{{User.Password}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
-                        </form>
+                        </div>
+                        <div class="col-md-6">
+                            <form>
+                                <h3>Edit User</h3>
+                                <p>User ID: {{editID}}</p>
+
+                                <div class="form-group">
+                                    <label for="txt_editusername" id="lbl_editusername">First Name:</label>
+                                    <input type="text" class="form-control" id="txt_editusername" ng-model="editFirstName" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="txt_edituserlastname" id="lbl_edituserlastname">Last Name:</label>
+                                    <input type="text" class="form-control" id="txt_edituserlastname" ng-model="editLastName" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="txt_edituseraddress" id="lbl_edituseraddress">Address:</label>
+                                    <input type="text" class="form-control" id="txt_edituseraddress" ng-model="editAddress" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="txt_editusermobile" id="lbl_editusermobile">Mobile:</label>
+                                    <input type="number" class="form-control" id="txt_editusermobile" ng-model="editMobile" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="txt_edituserusername" id="lbl_edituserusername">Username:</label>
+                                    <input type="text" class="form-control" id="txt_edituserusername" ng-model="editUsername" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="txt_edituserpassword" id="lbl_edituserpassword">Password:</label>
+                                    <input type="text" class="form-control" id="txt_edituserpassword" ng-model="editPassword" />
+                                </div>
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-primary" id="btn_editproduct" ng-click="editUser(editID,editFirstName,editLastName,editAddress,editMobile,editUsername,editPassword)">Save</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
