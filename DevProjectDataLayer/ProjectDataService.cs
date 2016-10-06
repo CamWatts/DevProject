@@ -479,6 +479,41 @@ namespace DevProjectDataLayer
             }
             return reportDtoList;
         }
+		
+		public TransactionStatusModel UpdateUser(UserDTO user)
+        {
+            TransactionStatusModel transStatus = new TransactionStatusModel();
+
+            using (SqlConnection con = new SqlConnection(cs))
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("UpdateUser", con);
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("@userId", user.UserID));
+                    cmd.Parameters.Add(new SqlParameter("@firstName", user.FirstName));
+                    cmd.Parameters.Add(new SqlParameter("@lastName", user.LastName));
+                    cmd.Parameters.Add(new SqlParameter("@address", user.Address));
+                    cmd.Parameters.Add(new SqlParameter("@mobile", user.Mobile));
+                    cmd.Parameters.Add(new SqlParameter("@username", user.Username));
+                    cmd.Parameters.Add(new SqlParameter("@password", user.Password));
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    transStatus.ReturnMessage.Add("User Product failed");
+                    transStatus.ReturnStatus = false;
+                    return transStatus;
+                }
+            }
+
+            transStatus.ReturnMessage.Add("User successfully updated");
+            transStatus.ReturnStatus = true;
+            return transStatus;
+        }
     }
 }
 
