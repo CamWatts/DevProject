@@ -423,12 +423,12 @@ namespace DevProjectDataLayer
 
                                 if (reportDto.Date == date)
                                 {
-                                    if (reportDto.Sales.Count < 8) {
+                                    if (reportDto.Sales.Count < productCount) {
                                         reportDto.Sales.Add(totalSold);
                                     }
                                     else
                                     {
-                                        reportDto.Sales[reportDto.Sales.Count - 8] += totalSold;
+                                        reportDto.Sales[reportDto.Sales.Count - productCount] += totalSold;
                                     }
                                 }
                                 else

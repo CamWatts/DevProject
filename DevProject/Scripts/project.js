@@ -142,7 +142,7 @@ app.controller("projectController", function ($scope) {
     };
 
     $scope.toReports = function () {
-        location.assign("Reports/Index");
+        location.assign("../Reports/Index");
     }
 
 });
@@ -216,6 +216,7 @@ function GetProducts($scope) {
         "json").success(function (response) {
             $scope.Products = response.ProductDtoList;
             $scope.$apply();
+            StockAlert(response.ProductDtoList, $scope);
         }).fail(function (response) {
 
         });
@@ -312,4 +313,17 @@ function GetUsers($scope) {
         }).fail(function (response) {
 
         });
+};
+
+function StockAlert(products, $scope) {
+    var alerts = 0;
+
+    products.forEach(function (product) {
+        if (product.StockAmount < product.CheckAmount) {
+            alerts += 1;
+        }
+    });
+
+    $scope.lowProducts = alert;
+    $scope.$apply();
 };
